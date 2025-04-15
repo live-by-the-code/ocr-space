@@ -19,11 +19,11 @@ class OcrResponse
 
     protected function parseResponse()
     {
-        $this->parsedResults = $this->jsonResponse->ParsedResults;
-        $this->ocrExitCode = $this->jsonResponse->OCRExitCode;
-        $this->errorMessage = $this->jsonResponse->ErrorMessage;
-        $this->errorDetails = $this->jsonResponse->ErrorDetails;
-        $this->processingTime = $this->jsonResponse->ProcessingTimeInMilliseconds;
+        $this->parsedResults    = isset($this->jsonResponse->ParsedResults) ?                   $this->jsonResponse->ParsedResults : [];
+        $this->ocrExitCode      = isset($this->jsonResponse->OCRExitCode) ?                     $this->jsonResponse->OCRExitCode : 0;
+        $this->errorMessage     = isset($this->jsonResponse->ErrorMessage) ?                    $this->jsonResponse->ErrorMessage : null;
+        $this->errorDetails     = isset($this->jsonResponse->ErrorDetails) ?                    $this->jsonResponse->ErrorDetails : null;
+        $this->processingTime   = isset($this->jsonResponse->ProcessingTimeInMilliseconds) ?    $this->jsonResponse->ProcessingTimeInMilliseconds : null;
     }
 
 
@@ -66,6 +66,6 @@ class OcrResponse
 
     public function __toString()
     {
-        return 'OCR.space Response: (JSON)' . json_encode($this->jsonResponse);
+        return json_encode($this->jsonResponse);
     }
 }
